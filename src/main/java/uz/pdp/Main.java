@@ -13,22 +13,19 @@ public class Main {
         // create IOC
         BeanFactory factory = new ClassPathXmlApplicationContext("classpath:ioc-config.xml");
 
-        ProductValidator productValidatorBean = factory.getBean(ProductValidator.class);
-        ProductValidator productValidatorBean2 = factory.getBean(ProductValidator.class);
-        ProductService productServiceBean = factory.getBean("productService", ProductService.class);
-        ProductService productServiceBean2 = factory.getBean("productService", ProductService.class);
-        ProductService productServiceBean3 = factory.getBean("productService2", ProductService.class);
-        ProductService productServiceBean4 = factory.getBean("productService2", ProductService.class);
+        ProductValidator productValidatorBean = factory.getBean(ProductValidator.class);        ProductValidator productValidatorBean2 = factory.getBean(ProductValidator.class);
+
+        ProductService productService = factory.getBean(ProductService.class);
 
 
         System.out.println(productValidatorBean);
-        System.out.println(productValidatorBean2);
+        System.out.println(productService);
 
 
-        System.out.println(productServiceBean);
-        System.out.println(productServiceBean2);
-        System.out.println(productServiceBean3);
-        System.out.println(productServiceBean4);
+
+
+
+
 
     }
 }
