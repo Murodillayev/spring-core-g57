@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="1" class="uz.pdp.ProductService" name="productService"/>
+    <bean id="2" class="uz.pdp.ProductValidator" name="productValidator"/>
+    <bean id="3" class="uz.pdp.ProductService" name="productService2"/>
+
+</beans>
