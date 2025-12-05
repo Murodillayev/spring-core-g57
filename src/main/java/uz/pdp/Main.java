@@ -30,6 +30,5 @@ public class Main {
         System.out.println(productServiceBean3);
         System.out.println(productServiceBean4);
 
-
     }
 }
