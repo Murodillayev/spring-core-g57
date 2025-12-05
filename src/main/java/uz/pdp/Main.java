@@ -2,6 +2,9 @@ package uz.pdp;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import uz.pdp.config.IocConfig;
+import uz.pdp.service.OrderService;
+import uz.pdp.service.ProductService;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.

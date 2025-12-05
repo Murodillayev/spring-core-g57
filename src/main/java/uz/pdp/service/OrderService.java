@@ -1,18 +1,17 @@
-package uz.pdp;
+package uz.pdp.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class OrderService {
 
+    @Autowired
     private ProductValidator productValidator;
 
-
-    // DI
 //    public OrderService(ProductValidator productValidator) {
 //        this.productValidator = productValidator;
 //    }
-
-    public void setProductValidator(ProductValidator productValidator) {
-        this.productValidator = productValidator;
-    }
 
     public void m1() {
         productValidator.validate();
@@ -25,3 +24,4 @@ public class OrderService {
 // -> SI
 // -> FI
 // -> CI
+
