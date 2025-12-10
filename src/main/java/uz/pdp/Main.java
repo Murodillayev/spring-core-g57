@@ -1,6 +1,7 @@
 package uz.pdp;
 
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -11,20 +12,18 @@ public class Main {
         // java based
 
         // create IOC
-        BeanFactory factory = new ClassPathXmlApplicationContext("classpath:ioc-config.xml");
+//        BeanFactory factory = new ClassPathXmlApplicationContext("classpath:ioc-config.xml");
+        BeanFactory factory = new AnnotationConfigApplicationContext(IocConfig.class);
 
-        ProductValidator productValidatorBean = factory.getBean(ProductValidator.class);        ProductValidator productValidatorBean2 = factory.getBean(ProductValidator.class);
-
-        ProductService productService = factory.getBean(ProductService.class);
-
-
-        System.out.println(productValidatorBean);
-        System.out.println(productService);
-
-
-
-
-
+//        ProductService productService = factory.getBean(ProductService.class);
+//        ProductService productService1 = factory.getBean(ProductService.class);
+//        ProductService productService2 = factory.getBean(ProductService.class);
+//        ProductService productService3 = factory.getBean(ProductService.class);
+//
+//        System.out.println(productService);
+//        System.out.println(productService1);
+//        System.out.println(productService2);
+//        System.out.println(productService3);
 
 
     }
