@@ -1,35 +1,30 @@
 package uz.pdp;
 
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Scope;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-//@Scope("prototype")
 public class ProductService {
 
+    private final ProductPotgresDao productPotgresDao;
+    private final ProductMySqlDao productMySqlDao;
 
-    {
-        System.out.println(" ProductService bean yaratildi");
+    public ProductService( ProductPotgresDao productPotgresDao, ProductMySqlDao productMySqlDao) {
+        this.productPotgresDao = productPotgresDao;
+        this.productMySqlDao = productMySqlDao;
     }
 
-    private final ProductValidator validator;
-
-    public ProductService(ProductValidator validator) {
-        this.validator = validator;
-    }
-
-    public void initMethod() {
-        System.out.println("initMethod");
-    }
 
     public void m1() {
-        validator.validate();
         System.out.println("m1 method works");
+        productPotgresDao.save();
+
     }
 
-    public void destroyMethod() {
-        System.out.println("destroyMethod");
+    public void m2() {
+        System.out.println("m2 method works");
+        productMySqlDao.save();
+
     }
 
 
