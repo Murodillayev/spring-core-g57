@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+//@Repository
 public class BookInMemRepository implements BookRepository {
 
     private static final List<Book> books = new ArrayList<>();

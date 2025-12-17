@@ -12,7 +12,7 @@ public class BookService {
 
     private final BookRepository repository;
 
-    public BookService(@Qualifier("bookRepositoryImpl") BookRepository repository) {
+    public BookService(BookRepository repository) {
         this.repository = repository;
     }
 

@@ -2,36 +2,38 @@ package uz.pdp.repository.impl;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import uz.pdp.model.Book;
 import uz.pdp.repository.BookRepository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
 public class BookRepositoryImpl implements BookRepository {
-    private final JdbcTemplate jdbcTemplate;
+    private final NamedParameterJdbcTemplate jdbcTemplate;
 
-    public BookRepositoryImpl(JdbcTemplate jdbcTemplate) {
+    public BookRepositoryImpl(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
     public List<Book> findAll() {
 
-        String sql = "SELECT * FROM books";
+        String sql = "SELECT * FROM books order by title desc";
 
         return jdbcTemplate.query(sql, bookRowMapper());
     }
 
     @Override
     public Optional<Book> findById(String id) {
-        String sql = "SELECT * FROM books WHERE id = ?";
+        String sql = "SELECT * FROM books WHERE id = :id";
         try {
-            Book book = jdbcTemplate.queryForObject(sql, bookRowMapper(), id);
+            Book book = jdbcTemplate.queryForObject(sql, Map.of("id", id), bookRowMapper());
             return Optional.ofNullable(book);
-        }catch (Exception e) {
+        } catch (Exception e) {
             return Optional.empty();
         }
 
@@ -41,18 +43,18 @@ public class BookRepositoryImpl implements BookRepository {
     public void save(Book book) {
         Optional<Book> byId = findById(book.getId());
         String sql = (byId.isEmpty()) ?
-                "INSERT INTO books (title, author, isbn, total_copies,rented_copies, id) VALUES (?, ?, ?, ?, ?, ?)"
+                "INSERT INTO books (id,title, author, isbn, total_copies,rented_copies) VALUES (:id,:title, :author, :isbn, :total_copies,:rented_copies)"
                 :
-                "UPDATE books SET title = ?, author = ?, isbn = ?, total_copies = ?,rented_copies = ? WHERE id = ?";
+                "UPDATE books SET title = :title, author = :author, isbn = :isbn, total_copies = :total_copies, rented_copies = :rented_copies WHERE id = :id";
 
-        jdbcTemplate.update(sql,
-                book.getTitle(),
-                book.getAuthor(),
-                book.getIsbn(),
-                book.getTotalCopies(),
-                book.getRentedCopies(),
-                book.getId()
-        );
+        jdbcTemplate.update(sql, Map.of(
+                "title", book.getTitle(),
+                "rented_copies", book.getRentedCopies(),
+                "author", book.getAuthor(),
+                "isbn", book.getIsbn(),
+                "total_copies", book.getTotalCopies(),
+                "id", book.getId()
+        ));
     }
 
     private RowMapper<Book> bookRowMapper() {
@@ -70,8 +72,8 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public void deleteById(String id) {
-        String sql = "DELETE FROM books WHERE id = ?";
-        jdbcTemplate.update(sql, id);
+        String sql = "DELETE FROM books WHERE id = :id";
+        jdbcTemplate.update(sql, Map.of("id", id));
     }
 }
 
