@@ -1,10 +1,106 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head >
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Index page</title>
+    <link th:replace="~{fragment/index :: stylecha}">
+    <th:block th:replace="~{fragment/index :: headcha(~{::title})}"/>
 </head>
 <body>
-<h1 th:text="|Salom ${name}|"></h1>
+
+<div th:replace="~{fragment/index :: my-nav('index')}"></div>
+
+<h1 th:text="${name} ?:_">No auth</h1>
+<ul>
+    <li th:text="${post.author}"></li>
+    <li data-th-text="${post.title}"></li>
+    <li th:text="${post.content}"></li>
+</ul>
+
+
+<br>
+<h1>MANA bu</h1>
+<ul>
+    <th:block th:object="${p}" th:each="p : ${posts}" >
+        <li th:text="*{title}"></li>
+        <li th:text="*{content}"></li>
+    </th:block>
+</ul>
+
+<form th:action="@{/test/{id}(id=${post.id})}" method="post">
+    <input th:name="title" th:value="${post.title}">
+</form>
+
+<h1 th:text="#{hi}"></h1>
+<h1 th:text="#{hello.world}"></h1>
+
+
+<ul th:object="${post}">
+    <li th:text="*{author}"></li>
+    <li th:text="*{title}"></li>
+    <li th:text="*{content}"></li>
+</ul>
+
+
+<h1 th:text="|'Hello'  ${name}|"></h1>
+
+
+<form>
+    <input th:name="title" th:attr="value=${post.title}">
+    <input th:name="content" th:attr="value=${post.content}">
+    <button th:attr="onclick=${opr} + ''">Say hello</button>
+
+</form>
+
+<button type="button" class="btn" th:classappend="${' ' + buttonStyleType}">Primary</button>
+
+
+
+<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+    <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" th:checked="${isChecked}">
+    <label class="btn btn-outline-primary" for="btncheck1">Checkbox 1</label>
+
+    <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off" th:checked="not ${isChecked}">
+    <label class="btn btn-outline-primary" for="btncheck2">Checkbox 2</label>
+
+    <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off"  >
+    <label class="btn btn-outline-primary" for="btncheck3">Checkbox 3</label>
+</div>
+
+
+<button onclick="hello()"></button>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Content</th>
+        <th scope="col">Author</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="post : ${posts}">
+        <th scope="row" th:text="${postStat.count}"></th>
+        <td th:text="${post.title}">Mark</td>
+        <td th:text="${post.content}">Otto</td>
+        <td th:text="${post.author}">@mdo</td>
+    </tr>
+
+    </tbody>
+</table>
+<script th:inline="javascript">
+
+    const post = [[${post}]];
+    function hello() {
+
+        console.log(post)
+        alert(post)
+
+    }
+</script >
 </body>
+
 </html>
+

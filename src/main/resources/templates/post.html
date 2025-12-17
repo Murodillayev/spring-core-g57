@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Post page</title>
+    <link th:replace="~{fragment/index :: stylecha}">
+    <th:block th:replace="~{fragment/index :: headcha(~{::title})}"/>
+</head>
+<body>
+
+<div th:replace="fragment/index :: my-nav('post')"></div>
+
+<h1> Posts page</h1>
+<h1 th:text="${'Hello world'}"></h1>
+<h1 th:text="${2 + 3}"></h1>
+<h1 th:text="${100 / 10}"></h1>
+<h1 th:text="${100 - 10}"></h1>
+<h1 th:text="${100 * 10}"></h1>
+<h1 th:text="${'Hello' + 'world'}"></h1>
+<div th:with="name='Axmadullo'">
+    <h1 th:text="${name}"></h1>
+</div>
+
+<button onclick="hello()">say</button>
+
+
+
+<script th:inline="javascript">
+
+    const post = [[${post}]];
+    function hello() {
+
+        console.log(post)
+        alert(JSON.stringify(post))
+
+    }
+</script >
+
+</body>
+</html>
