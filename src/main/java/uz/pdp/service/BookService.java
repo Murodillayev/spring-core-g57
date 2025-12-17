@@ -1,5 +1,6 @@
 package uz.pdp.service;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import uz.pdp.model.Book;
 import uz.pdp.repository.BookRepository;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ public class BookService {
 
     private final BookRepository repository;
 
-    public BookService(BookRepository repository) {
+    public BookService(@Qualifier("bookRepositoryImpl") BookRepository repository) {
         this.repository = repository;
     }
 

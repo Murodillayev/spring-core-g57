@@ -6,8 +6,6 @@ import org.springframework.stereotype.Repository;
 import uz.pdp.model.Book;
 import uz.pdp.repository.BookRepository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,8 +28,13 @@ public class BookRepositoryImpl implements BookRepository {
     @Override
     public Optional<Book> findById(String id) {
         String sql = "SELECT * FROM books WHERE id = ?";
-        Book book = jdbcTemplate.queryForObject(sql, bookRowMapper(), id);
-        return Optional.ofNullable(book);
+        try {
+            Book book = jdbcTemplate.queryForObject(sql, bookRowMapper(), id);
+            return Optional.ofNullable(book);
+        }catch (Exception e) {
+            return Optional.empty();
+        }
+
     }
 
     @Override
@@ -59,8 +62,8 @@ public class BookRepositoryImpl implements BookRepository {
             book.setTitle(rs.getString("title"));
             book.setAuthor(rs.getString("author"));
             book.setIsbn(rs.getString("isbn"));
-            book.setTotalCopies(rs.getInt("totalCopies"));
-            book.setRentedCopies(rs.getInt("rentedCopies"));
+            book.setTotalCopies(rs.getInt("total_copies"));
+            book.setRentedCopies(rs.getInt("rented_copies"));
             return book;
         };
     }
