@@ -81,3 +81,12 @@ public class BookRepositoryImpl implements BookRepository {
 // query -> find many
 // queryForObject -> find one
 // update  -> create, update, delete
+
+// omborchi (spring) 95 %
+// dorixonachi (spring) 50 %
+// online taxi (telegram bot + spring) 20 %   (*)
+// online restaurant delivery (telegram bot + spring) 20 %  (*)
+// dokonchi (spring) 20 %  (*)
+// db-control (spring) 0.3 %        (*)
+// online document (spring) 0.1 %   (*)
+// online shop (spring)  90 %
