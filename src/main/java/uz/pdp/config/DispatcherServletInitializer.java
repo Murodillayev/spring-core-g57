@@ -17,7 +17,7 @@ public class DispatcherServletInitializer extends AbstractDispatcherServletIniti
     @Override
     protected @Nullable WebApplicationContext createRootApplicationContext() {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.register(AppConfig.class);
+        context.register(SecurityConfig.class,AppConfig.class);
         return context;
     }
 
