@@ -90,3 +90,9 @@ public class BookRepositoryImpl implements BookRepository {
 // db-control (spring) 0.3 %        (*)
 // online document (spring) 0.1 %   (*)
 // online shop (spring)  90 %
+
+
+// java(90% bank-davlat,), python, node js(payme,click), go, php(ba
+
+
+// web, mobile, desctop
