@@ -52,6 +52,7 @@ public class AuthUserRepositoryImpl implements AuthUserRepository {
             authUser.setUsername(rs.getString("username"));
             authUser.setPassword(rs.getString("password"));
             authUser.setFullName(rs.getString("full_name"));
+            authUser.setRole(rs.getString("role"));
             authUser.setId(rs.getString("id"));
             return authUser;
         };

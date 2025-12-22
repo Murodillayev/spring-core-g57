@@ -3,20 +3,38 @@ package uz.pdp.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import uz.pdp.repository.AuthUserRepository;
+import uz.pdp.repository.PermissionRepository;
+import uz.pdp.repository.RoleRepository;
 
 @Configuration
 @EnableWebSecurity
+//@EnableMethodSecurity(
+//        prePostEnabled = true,
+//        securedEnabled = true,
+//        jsr250Enabled = true
+//)
 public class SecurityConfig {
-    private final AuthUserRepository authUserRepository;
 
-    public SecurityConfig(AuthUserRepository authUserRepository) {
+    private String[] WHITE_LIST = {
+            "/login",
+            "/register",
+    };
+    private final AuthUserRepository authUserRepository;
+    private final PermissionRepository permissionRepository;
+    private final RoleRepository roleRepository;
+
+    public SecurityConfig(AuthUserRepository authUserRepository, PermissionRepository permissionRepository, RoleRepository roleRepository) {
         this.authUserRepository = authUserRepository;
+        this.permissionRepository = permissionRepository;
+        this.roleRepository = roleRepository;
     }
 
 
@@ -25,9 +43,12 @@ public class SecurityConfig {
 
         security.authorizeHttpRequests(
                 auth ->
-                        auth.requestMatchers(
-                                        "/login", "/register")
+                        auth.requestMatchers(WHITE_LIST)
                                 .permitAll()
+                                .requestMatchers("/books/admin")
+                                .hasAnyAuthority("create:book", "create:rental")
+                                .requestMatchers("/books/user")
+                                .hasAnyRole("USER", "ADMIN")
                                 .anyRequest()
                                 .authenticated()
         );
@@ -62,7 +83,8 @@ public class SecurityConfig {
 
     @Bean
     public CustomUserDetailsService customUserDetailsService() {
-        return new CustomUserDetailsService(authUserRepository);
+        return new CustomUserDetailsService(authUserRepository, permissionRepository, roleRepository);
     }
+
 
 }

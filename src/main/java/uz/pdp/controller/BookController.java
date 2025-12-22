@@ -1,5 +1,7 @@
 package uz.pdp.controller;
 
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import uz.pdp.model.Book;
 import uz.pdp.service.BookService;
 import org.springframework.stereotype.Controller;
@@ -38,5 +40,19 @@ public class BookController {
     public String save(@ModelAttribute Book book) {
         service.add(book);
         return "redirect:/books";
+    }
+
+//    @PreAuthorize(value = "hasAnyRole('ADMIN')")
+    @GetMapping("/admin")
+    public String admin() {
+
+        return "admin_page";
+    }
+
+//    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @GetMapping("/user")
+//    @Secured({"ROLE_ADMIN","ROLE_USER"})
+    public String user() {
+        return "user_page";
     }
 }
