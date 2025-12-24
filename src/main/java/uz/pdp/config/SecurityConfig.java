@@ -26,6 +26,7 @@ public class SecurityConfig {
     private String[] WHITE_LIST = {
             "/login",
             "/register",
+            "/test/**",
     };
     private final AuthUserRepository authUserRepository;
     private final PermissionRepository permissionRepository;

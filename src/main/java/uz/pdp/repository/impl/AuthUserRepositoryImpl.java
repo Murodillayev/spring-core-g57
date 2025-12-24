@@ -11,6 +11,7 @@ import uz.pdp.repository.AuthUserRepository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -44,6 +45,12 @@ public class AuthUserRepositoryImpl implements AuthUserRepository {
     public void save(AuthUser authUser) {
         String sql = "insert into auth_users(id,username,password,full_name) values(?,?,?,?)";
         jdbcTemplate.update(sql, authUser.getId(), authUser.getUsername(), encoder.encode(authUser.getPassword()), authUser.getFullName());
+    }
+
+    @Override
+    public List<AuthUser> findAll() {
+        String sql = "SELECT * FROM auth_users";
+        return jdbcTemplate.query(sql, rowMapper());
     }
 
     private RowMapper<AuthUser> rowMapper() {

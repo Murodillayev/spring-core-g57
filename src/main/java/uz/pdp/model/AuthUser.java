@@ -15,4 +15,7 @@ public class AuthUser {
     private String username;
     private String password;
     private String roleId;
+    private String imgUrl;
+
+
 }

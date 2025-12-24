@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import uz.pdp.model.AuthRole;
 import uz.pdp.model.AuthUser;
 import uz.pdp.model.Permission;
 import uz.pdp.repository.AuthUserRepository;
@@ -32,10 +33,10 @@ public class CustomUserDetailsService implements UserDetailsService {
                 );
 
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        String role = roleRepository.findById(authUser.getId());
+        AuthRole role = roleRepository.findById(authUser.getRoleId()).orElse(null);
 
         if (role != null) {
-            SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role);
+            SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role.getCode());
             authorities.add(authority);
         }
         List<Permission> permissions = permissionRepository.findAllByRoleId(authUser.getRoleId());
@@ -48,6 +49,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 
         // ROLE_ADMIN, create:book, create:rental, ...
-        return new User(authUser.getUsername(), authUser.getPassword(), authorities);
+        return CustomUserDetails.builder()
+                .id(authUser.getId())
+                .username(authUser.getUsername())
+                .password(authUser.getPassword())
+                .authorities(authorities)
+                .fullName(authUser.getFullName())
+                .imgUrl("https://images.ctfassets.net/xjcz23wx147q/iegram9XLv7h3GemB5vUR/0345811de2da23fafc79bd00b8e5f1c6/Max_Rehkopf_200x200.jpeg")
+                .build();
     }
 }

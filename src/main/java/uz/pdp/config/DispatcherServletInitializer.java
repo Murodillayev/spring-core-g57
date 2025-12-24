@@ -1,6 +1,8 @@
 package uz.pdp.config;
 
 import io.micrometer.common.lang.Nullable;
+import jakarta.servlet.MultipartConfigElement;
+import jakarta.servlet.ServletRegistration;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.support.AbstractDispatcherServletInitializer;
@@ -24,5 +26,11 @@ public class DispatcherServletInitializer extends AbstractDispatcherServletIniti
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/*"};
+    }
+
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+        MultipartConfigElement multipartConfigElement = new MultipartConfigElement("");
+        registration.setMultipartConfig(multipartConfigElement);
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -96,7 +96,7 @@
 </head>
 <body>
 
-<div class="login-container">
+<div sec:authorize="isAnonymous()" class="login-container">
     <div class="login-header">
         <h2>Xush kelibsiz</h2>
         <p class="text-muted">Tizimga kirish uchun ma'lumotlarni kiriting</p>
@@ -124,6 +124,9 @@
     <div class="footer-links">
         <p>Accountingiz yo'qmi? <a href="/register">Ro'yxatdan o'ting</a></p>
     </div>
+</div>
+<div sec:authorize="isAuthenticated()">
+    <h1 th:text="'Siz authentifacatsiyadan otgansiz hurmatli ' + ${#authentication.principal.username} + '!!'"></h1>
 </div>
 
 </body>

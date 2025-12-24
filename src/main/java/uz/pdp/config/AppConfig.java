@@ -12,7 +12,8 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan(basePackages = {
         "uz.pdp.service",
-        "uz.pdp.repository"
+        "uz.pdp.repository",
+        "uz.pdp.mapper"
 })
 public class AppConfig {
 
@@ -35,7 +36,4 @@ public class AppConfig {
         dataSource.setPassword("19801980");
         return dataSource;
     }
-
-
-
 }

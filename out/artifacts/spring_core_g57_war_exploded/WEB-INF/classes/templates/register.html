@@ -62,21 +62,37 @@
           <p class="text-muted small">Kutubxona tizimiga xush kelibsiz!</p>
         </div>
 
-        <form th:action="@{/register}" th:object="${user}" method="post">
+        <form th:action="@{/register}" method="post" enctype="multipart/form-data">
 
           <div class="mb-3">
             <label for="fullName" class="form-label">To'liq ism</label>
-            <input type="text" th:field="*{fullName}" class="form-control shadow-sm" id="fullName" placeholder="Ali Valiyev" required>
+            <input type="text" name="fullName" class="form-control shadow-sm" id="fullName" placeholder="Ali Valiyev" required>
           </div>
 
           <div class="mb-3">
             <label for="username" class="form-label">Username</label>
-            <input type="text" th:field="*{username}" class="form-control shadow-sm" id="username" placeholder="ali01" required>
+            <input type="text" name ="username" class="form-control shadow-sm" id="username" placeholder="ali01" required>
           </div>
 
           <div class="mb-3">
             <label for="password" class="form-label">Parol</label>
-            <input type="password" th:field="*{password}" class="form-control shadow-sm" id="password" placeholder="••••••••" required>
+            <input type="password" name="password" class="form-control shadow-sm" id="password" placeholder="••••••••" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="img" class="form-label">Rasm</label>
+            <input type="file" name="img" class="form-control shadow-sm" id="img">
+          </div>
+
+          <div class="mb-3">
+            <label for="role" class="form-label">Foydalanuvchi roli</label>
+            <select name="roleId" class="form-select shadow-sm" id="role" required>
+              <option value="" disabled selected>Rolni tanlang...</option>
+              <option th:each="role : ${roles}"
+                      th:value="${role.id}"
+                      th:text="${role.name}">
+              </option>
+            </select>
           </div>
 
           <div class="d-grid mt-4">
