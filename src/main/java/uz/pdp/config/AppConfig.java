@@ -36,4 +36,10 @@ public class AppConfig {
         dataSource.setPassword("19801980");
         return dataSource;
     }
+
+
+    @Bean
+    public SessionUser sessionUser() {
+        return new SessionUser();
+    }
 }

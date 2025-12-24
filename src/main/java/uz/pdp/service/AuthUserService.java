@@ -18,9 +18,13 @@ public class AuthUserService {
     private final AuthUserMapper mapper;
     private final AuthUserRepository repository;
 
-    public void create(AuthUserCreateDto dto, MultipartFile img) {
+    public void create(AuthUserCreateDto dto) {
         AuthUser authUser = mapper.fromDto(dto);
-        authUser.setImgUrl(fileService.uploadUserImg(img));
+        authUser.setImgUrl(fileService.uploadUserImg(dto.getImg()));
+
+//        for (MultipartFile img : dto.getImgs()) {
+//            fileService.uploadUserImg(img);
+//        }
         repository.save(authUser);
     }
 

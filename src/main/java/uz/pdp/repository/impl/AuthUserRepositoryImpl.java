@@ -19,11 +19,9 @@ public class AuthUserRepositoryImpl implements AuthUserRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
-    private final PasswordEncoder encoder;
 
-    public AuthUserRepositoryImpl(JdbcTemplate jdbcTemplate, @Lazy PasswordEncoder encoder) {
+    public AuthUserRepositoryImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.encoder = encoder;
     }
 
     @Override
@@ -43,8 +41,8 @@ public class AuthUserRepositoryImpl implements AuthUserRepository {
 
     @Override
     public void save(AuthUser authUser) {
-        String sql = "insert into auth_users(id,username,password,full_name) values(?,?,?,?)";
-        jdbcTemplate.update(sql, authUser.getId(), authUser.getUsername(), encoder.encode(authUser.getPassword()), authUser.getFullName());
+        String sql = "insert into auth_users(id,username,password,full_name,img_url,role_id) values(?,?,?,?,?,?)";
+        jdbcTemplate.update(sql, authUser.getId(), authUser.getUsername(), authUser.getPassword(), authUser.getFullName(), authUser.getImgUrl(), authUser.getRoleId());
     }
 
     @Override
@@ -60,6 +58,7 @@ public class AuthUserRepositoryImpl implements AuthUserRepository {
             authUser.setPassword(rs.getString("password"));
             authUser.setFullName(rs.getString("full_name"));
             authUser.setRoleId(rs.getString("role_id"));
+            authUser.setImgUrl(rs.getString("img_url"));
             authUser.setId(rs.getString("id"));
             return authUser;
         };

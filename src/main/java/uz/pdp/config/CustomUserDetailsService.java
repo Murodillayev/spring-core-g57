@@ -55,7 +55,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .password(authUser.getPassword())
                 .authorities(authorities)
                 .fullName(authUser.getFullName())
-                .imgUrl("https://images.ctfassets.net/xjcz23wx147q/iegram9XLv7h3GemB5vUR/0345811de2da23fafc79bd00b8e5f1c6/Max_Rehkopf_200x200.jpeg")
+                .imgUrl((authUser.getImgUrl() == null) ? "https://images.ctfassets.net/xjcz23wx147q/iegram9XLv7h3GemB5vUR/0345811de2da23fafc79bd00b8e5f1c6/Max_Rehkopf_200x200.jpeg" : authUser.getImgUrl())
                 .build();
     }
 }

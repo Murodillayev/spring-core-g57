@@ -1,117 +1,134 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MangaUz | Ro'yxatdan o'tish</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: #f8f9fa; /* Juda och kulrang fon */
-      font-family: 'Inter', sans-serif;
-    }
-    .register-container {
-      margin-top: 100px;
-    }
-    .register-card {
-      background: #ffffff;
-      border: none;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Yumshoq soya */
-    }
-    .form-label {
-      font-weight: 500;
-      color: #495057;
-    }
-    .form-control {
-      border-radius: 10px;
-      padding: 12px;
-      border: 1px solid #dee2e6;
-    }
-    .form-control:focus {
-      border-color: #0d6efd;
-      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
-    }
-    .btn-register {
-      background-color: #0d6efd;
-      border: none;
-      border-radius: 10px;
-      padding: 12px;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-    .btn-register:hover {
-      background-color: #0b5ed7;
-      transform: translateY(-1px);
-    }
-    .manga-logo {
-      color: #0d6efd;
-      font-weight: 800;
-      letter-spacing: -1px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MangaUz | Ro'yxatdan o'tish</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Juda och kulrang fon */
+            font-family: 'Inter', sans-serif;
+        }
+
+        .register-container {
+            margin-top: 100px;
+        }
+
+        .register-card {
+            background: #ffffff;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Yumshoq soya */
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 12px;
+            border: 1px solid #dee2e6;
+        }
+
+        .form-control:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+        }
+
+        .btn-register {
+            background-color: #0d6efd;
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-register:hover {
+            background-color: #0b5ed7;
+            transform: translateY(-1px);
+        }
+
+        .manga-logo {
+            color: #0d6efd;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container register-container">
-  <div class="row justify-content-center">
-    <div class="col-md-5 col-lg-4">
-      <div class="card register-card p-4">
-        <div class="text-center mb-4">
-          <h2 class="manga-logo">Kutubxona<span class="text-dark">Uz</span></h2>
-          <p class="text-muted small">Kutubxona tizimiga xush kelibsiz!</p>
-        </div>
+    <div class="row justify-content-center">
+        <div class="col-md-5 col-lg-4">
+            <div class="card register-card p-4">
+                <div class="text-center mb-4">
+                    <h2 class="manga-logo">Kutubxona<span class="text-dark">Uz</span></h2>
+                    <p class="text-muted small">Kutubxona tizimiga xush kelibsiz!</p>
+                </div>
 
-        <form th:action="@{/register}" method="post" enctype="multipart/form-data">
+                <form th:action="@{/register}" method="post" enctype="multipart/form-data">
 
-          <div class="mb-3">
-            <label for="fullName" class="form-label">To'liq ism</label>
-            <input type="text" name="fullName" class="form-control shadow-sm" id="fullName" placeholder="Ali Valiyev" required>
-          </div>
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">To'liq ism</label>
+                        <input type="text" name="fullName" class="form-control shadow-sm" id="fullName"
+                               placeholder="Ali Valiyev" required>
+                    </div>
 
-          <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" name ="username" class="form-control shadow-sm" id="username" placeholder="ali01" required>
-          </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" name="username" class="form-control shadow-sm" id="username"
+                               placeholder="ali01" required>
+                    </div>
 
-          <div class="mb-3">
-            <label for="password" class="form-label">Parol</label>
-            <input type="password" name="password" class="form-control shadow-sm" id="password" placeholder="••••••••" required>
-          </div>
 
-          <div class="mb-3">
-            <label for="img" class="form-label">Rasm</label>
-            <input type="file" name="img" class="form-control shadow-sm" id="img">
-          </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Parol</label>
+                        <input type="password" name="password" class="form-control shadow-sm" id="password"
+                               placeholder="••••••••" required>
+                    </div>
 
-          <div class="mb-3">
-            <label for="role" class="form-label">Foydalanuvchi roli</label>
-            <select name="roleId" class="form-select shadow-sm" id="role" required>
-              <option value="" disabled selected>Rolni tanlang...</option>
-              <option th:each="role : ${roles}"
-                      th:value="${role.id}"
-                      th:text="${role.name}">
-              </option>
-            </select>
-          </div>
+                    <div class="mb-3">
+                        <label for="img" class="form-label">Rasm</label>
+                        <input type="file" name="img" multiple="multiple" class="form-control shadow-sm" id="img">
+                    </div>
 
-          <div class="d-grid mt-4">
-            <button type="submit" class="btn btn-primary btn-register">Hisob yaratish</button>
-          </div>
-        </form>
+                    <div class="mb-3">
+                        <label for="imgs" class="form-label">Rasm</label>
+                        <input type="file" name="imgs" multiple="multiple" class="form-control shadow-sm" id="imgs">
+                    </div>
 
-        <div class="text-center mt-4">
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Foydalanuvchi roli</label>
+                        <select name="roleId" class="form-select shadow-sm" id="role" required>
+                            <option value="" disabled selected>Rolni tanlang...</option>
+                            <option th:each="role : ${roles}"
+                                    th:value="${role.id}"
+                                    th:text="${role.name}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-primary btn-register">Hisob yaratish</button>
+                    </div>
+                </form>
+
+                <div class="text-center mt-4">
                     <span class="text-muted small">Profilingiz bormi?
                         <a th:href="@{/login}" class="text-primary fw-bold text-decoration-none">Kirish</a>
                     </span>
-        </div>
-      </div>
+                </div>
+            </div>
 
-      <p class="text-center text-muted mt-4" style="font-size: 0.8rem;">
-        &copy; 2024 MangaUz. Barcha huquqlar himoyalangan.
-      </p>
+            <p class="text-center text-muted mt-4" style="font-size: 0.8rem;">
+                &copy; 2024 MangaUz. Barcha huquqlar himoyalangan.
+            </p>
+        </div>
     </div>
-  </div>
 </div>
 
 </body>

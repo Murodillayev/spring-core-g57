@@ -2,6 +2,9 @@ package uz.pdp.controller;
 
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import uz.pdp.config.CustomUserDetails;
+import uz.pdp.config.SessionUser;
 import uz.pdp.model.Book;
 import uz.pdp.service.BookService;
 import org.springframework.stereotype.Controller;
@@ -17,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/books")
 public class BookController {
+    private final SessionUser sessionUser;
 
     private final BookService service;
 
-    public BookController(BookService service) {
+    public BookController(SessionUser sessionUser, BookService service) {
+        this.sessionUser = sessionUser;
         this.service = service;
     }
 

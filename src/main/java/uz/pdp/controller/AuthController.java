@@ -2,11 +2,16 @@ package uz.pdp.controller;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import uz.pdp.config.CustomUserDetails;
+import uz.pdp.config.CustomUserDetailsService;
 import uz.pdp.dto.AuthUserCreateDto;
 import uz.pdp.dto.IdNameDto;
 import uz.pdp.model.AuthUser;
@@ -34,6 +39,12 @@ public class AuthController {
 
     @GetMapping("/register")
     public String registerPage(Model model) {
+
+//        SecurityContext context = SecurityContextHolder.getContext();
+//        Authentication authentication = context.getAuthentication();
+//        CustomUserDetails sessionUser =(CustomUserDetails) authentication.getPrincipal();
+
+
         List<IdNameDto> roles = roleService.roles();
 
         model.addAttribute("roles", roles);
@@ -42,11 +53,8 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String registerPage(
-            @ModelAttribute AuthUserCreateDto dto,
-            @RequestParam("img") MultipartFile img) {
-
-        service.create(dto, img);
+    public String registerPage(@ModelAttribute AuthUserCreateDto dto) {
+        service.create(dto);
         return "redirect:/login";
     }
 
