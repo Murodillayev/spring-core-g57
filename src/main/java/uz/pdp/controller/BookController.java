@@ -55,10 +55,13 @@ public class BookController {
         return "user_page";
     }
 
-    @ExceptionHandler({BadRequestException.class})
-    public ModelAndView handleBadRequestBookTitleHandler(BadRequestException e) {
-        ModelAndView modelAndView = new ModelAndView("error/400");
-        modelAndView.addObject("errorMessage", e.getMessage());
-        return modelAndView;
-    }
+
+
+//    @ExceptionHandler({BadRequestException.class})
+//    public ModelAndView handleBadRequestBookTitleHandler(BadRequestException e) {
+//        ModelAndView modelAndView = new ModelAndView("error/400");
+//        modelAndView.addObject("errorMessage", e.getMessage());
+//        return modelAndView;
+//    }
+
 }

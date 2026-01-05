@@ -29,6 +29,7 @@ public class SecurityConfig {
             "/login",
             "/register",
             "/test/**",
+            "/**"
     };
     private final AuthUserRepository authUserRepository;
     private final PermissionRepository permissionRepository;

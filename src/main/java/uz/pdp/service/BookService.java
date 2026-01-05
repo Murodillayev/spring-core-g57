@@ -1,7 +1,6 @@
 package uz.pdp.service;
 
 import org.springframework.stereotype.Service;
-import uz.pdp.exception.BadRequestException;
 import uz.pdp.model.Book;
 import uz.pdp.repository.BookRepository;
 import uz.pdp.validator.BookValidator;
