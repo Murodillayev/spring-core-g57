@@ -1,20 +1,13 @@
 package uz.pdp.controller;
 
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import uz.pdp.config.CustomUserDetails;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import uz.pdp.config.SessionUser;
+import uz.pdp.exception.BadRequestException;
 import uz.pdp.model.Book;
 import uz.pdp.service.BookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-
 
 
 @Controller
@@ -44,20 +37,28 @@ public class BookController {
     @PostMapping("/add")
     public String save(@ModelAttribute Book book) {
         service.add(book);
+
         return "redirect:/books";
     }
 
-//    @PreAuthorize(value = "hasAnyRole('ADMIN')")
+    //    @PreAuthorize(value = "hasAnyRole('ADMIN')")
     @GetMapping("/admin")
     public String admin() {
 
         return "admin_page";
     }
 
-//    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    //    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/user")
 //    @Secured({"ROLE_ADMIN","ROLE_USER"})
     public String user() {
         return "user_page";
+    }
+
+    @ExceptionHandler({BadRequestException.class})
+    public ModelAndView handleBadRequestBookTitleHandler(BadRequestException e) {
+        ModelAndView modelAndView = new ModelAndView("error/400");
+        modelAndView.addObject("errorMessage", e.getMessage());
+        return modelAndView;
     }
 }

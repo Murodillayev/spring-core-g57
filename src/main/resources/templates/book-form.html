@@ -24,13 +24,14 @@
                 </div>
                 <div class="card-body">
                     <form method="post" action="/books/add">
+                        <input type="text" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                         <div class="mb-3">
                             <label class="form-label">Kitob nomi</label>
-                            <input type="text" name="title" class="form-control" required>
+                            <input type="text" name="title" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Muallif</label>
-                            <input type="text" name="author" class="form-control" required>
+                            <input type="text" name="author" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ISBN</label>
@@ -38,7 +39,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Jami nusxa</label>
-                            <input type="number" name="totalCopies" min="1" class="form-control" required>
+                            <input type="number" name="totalCopies" min="1" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-primary">Saqlash</button>
                     </form>

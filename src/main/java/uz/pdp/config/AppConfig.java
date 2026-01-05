@@ -13,7 +13,9 @@ import javax.sql.DataSource;
 @ComponentScan(basePackages = {
         "uz.pdp.service",
         "uz.pdp.repository",
-        "uz.pdp.mapper"
+        "uz.pdp.mapper",
+        "uz.pdp.validator"
+
 })
 public class AppConfig {
 

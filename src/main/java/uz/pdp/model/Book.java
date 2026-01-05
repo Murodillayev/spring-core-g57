@@ -15,6 +15,6 @@ public class Book {
     private String title;
     private String author;
     private String isbn;
-    private int totalCopies;
-    private int rentedCopies = 0;
+    private Integer totalCopies;
+    private Integer rentedCopies = 0;
 }

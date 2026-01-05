@@ -1,18 +1,21 @@
 package uz.pdp.service;
 
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+import uz.pdp.exception.BadRequestException;
 import uz.pdp.model.Book;
 import uz.pdp.repository.BookRepository;
-import org.springframework.stereotype.Service;
+import uz.pdp.validator.BookValidator;
 
 import java.util.List;
 
 @Service
 public class BookService {
 
+    private final BookValidator validator;
     private final BookRepository repository;
 
-    public BookService(BookRepository repository) {
+    public BookService(BookValidator validator, BookRepository repository) {
+        this.validator = validator;
         this.repository = repository;
     }
 
@@ -21,12 +24,12 @@ public class BookService {
     }
 
     public Book getById(String id) {
-        return repository.findById(id).orElseThrow(
-                () -> new RuntimeException("Book with id " + id + " not found")
-        );
+        return validator.existsAndGet(id);
     }
 
     public void add(Book book) {
+        validator.validateAdd(book);
         repository.save(book);
     }
+
 }
