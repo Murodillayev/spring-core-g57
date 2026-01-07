@@ -2,6 +2,7 @@ package uz.pdp.service;
 
 import org.springframework.stereotype.Service;
 import uz.pdp.model.Book;
+import uz.pdp.model.dto.BookCreateDto;
 import uz.pdp.repository.BookRepository;
 import uz.pdp.validator.BookValidator;
 
@@ -26,8 +27,15 @@ public class BookService {
         return validator.existsAndGet(id);
     }
 
-    public void add(Book book) {
-        validator.validateAdd(book);
+    public void add(BookCreateDto dto) {
+        validator.validateAdd(dto);
+
+        Book book = new Book();
+        book.setTitle(dto.getTitle());
+        book.setAuthor(dto.getAuthor());
+        book.setIsbn(dto.getIsbn());
+        book.setTotalCopies(dto.getTotalCopies());
+
         repository.save(book);
     }
 

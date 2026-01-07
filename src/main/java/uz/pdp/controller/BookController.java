@@ -1,13 +1,13 @@
 package uz.pdp.controller;
 
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import uz.pdp.config.SessionUser;
-import uz.pdp.exception.BadRequestException;
-import uz.pdp.model.Book;
-import uz.pdp.service.BookService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import uz.pdp.config.SessionUser;
+import uz.pdp.model.dto.BookCreateDto;
+import uz.pdp.service.BookService;
 
 
 @Controller
@@ -23,22 +23,29 @@ public class BookController {
     }
 
     @GetMapping
-    public String list(Model model) {
+    public String list(Model model, @RequestParam(value = "success", required = false) String success) {
         model.addAttribute("books", service.getAll());
+        model.addAttribute("success", success);
         return "books";
     }
 
     @GetMapping("/add")
     public String form(Model model) {
-        model.addAttribute("book", new Book());
+        model.addAttribute("book", new BookCreateDto());
         return "book-form";
     }
 
     @PostMapping("/add")
-    public String save(@ModelAttribute Book book) {
-        service.add(book);
+    public String save(@Valid @ModelAttribute("book") BookCreateDto dto, BindingResult bindingResult) {
 
-        return "redirect:/books";
+        if (bindingResult.hasErrors()) {
+
+            return "book-form";
+        }
+
+        service.add(dto);
+
+        return "redirect:/books?success=Successfully";
     }
 
     //    @PreAuthorize(value = "hasAnyRole('ADMIN')")
@@ -55,13 +62,5 @@ public class BookController {
         return "user_page";
     }
 
-
-
-//    @ExceptionHandler({BadRequestException.class})
-//    public ModelAndView handleBadRequestBookTitleHandler(BadRequestException e) {
-//        ModelAndView modelAndView = new ModelAndView("error/400");
-//        modelAndView.addObject("errorMessage", e.getMessage());
-//        return modelAndView;
-//    }
 
 }

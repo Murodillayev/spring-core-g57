@@ -6,7 +6,14 @@
     <title>Kitob qo'shish</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+
+        span {
+            color: red;
+        }
+    </style>
 </head>
+
 <body class="bg-light">
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -23,23 +30,37 @@
                     <h4 class="mb-0">Yangi kitob qo'shish</h4>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="/books/add">
+                    <form method="post" action="/books/add" th:object="${book}">
                         <input type="text" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                         <div class="mb-3">
                             <label class="form-label">Kitob nomi</label>
-                            <input type="text" name="title" class="form-control">
+                            <input type="text" th:field="*{title}" class="form-control">
+                            <div th:if="${#fields.hasErrors('title')}">
+
+                                <th:block th:each="err : ${#fields.errors('title')}">
+                                    <span th:text="${err}"></span>
+                                    <br>
+                                </th:block>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Muallif</label>
-                            <input type="text" name="author" class="form-control">
+                            <input type="text" th:field="*{author}" class="form-control">
+                            <div th:if="${#fields.hasErrors('author')}">
+                                <span th:text="${#fields.errors('author')}"></span>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">ISBN</label>
-                            <input type="text" name="isbn" class="form-control">
+                            <input type="text" class="form-control" th:field="*{isbn}">
+                            <div th:if="${#fields.hasErrors('isbn')}">
+                                <span th:text="${#fields.errors('isbn')}"></span>
+                            </div>
+
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Jami nusxa</label>
-                            <input type="number" name="totalCopies" min="1" class="form-control">
+                            <input type="number" min="1" th:field="*{totalCopies}" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-primary">Saqlash</button>
                     </form>

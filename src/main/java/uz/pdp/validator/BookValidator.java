@@ -3,6 +3,7 @@ package uz.pdp.validator;
 import org.springframework.stereotype.Component;
 import uz.pdp.exception.BadRequestException;
 import uz.pdp.model.Book;
+import uz.pdp.model.dto.BookCreateDto;
 import uz.pdp.repository.BookRepository;
 
 @Component
@@ -13,7 +14,7 @@ public class BookValidator {
         this.repository = repository;
     }
 
-    public void validateAdd(Book book) {
+    public void validateAdd(BookCreateDto book) {
         if (book.getTitle() == null || book.getTitle().isEmpty()) {
             throw new BadRequestException("Book title is empty");
         }
