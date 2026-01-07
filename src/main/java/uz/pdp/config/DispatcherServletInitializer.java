@@ -35,8 +35,4 @@ public class DispatcherServletInitializer extends AbstractDispatcherServletIniti
         registration.setMultipartConfig(multipartConfigElement);
     }
 
-    @Override
-    protected Filter[] getServletFilters() {
-        return new Filter[]{new SecurityFilter()};
-    }
 }
