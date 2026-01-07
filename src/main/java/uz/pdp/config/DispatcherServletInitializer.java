@@ -1,6 +1,7 @@
 package uz.pdp.config;
 
 import io.micrometer.common.lang.Nullable;
+import jakarta.servlet.Filter;
 import jakarta.servlet.MultipartConfigElement;
 import jakarta.servlet.ServletRegistration;
 import org.springframework.web.context.WebApplicationContext;
@@ -19,7 +20,7 @@ public class DispatcherServletInitializer extends AbstractDispatcherServletIniti
     @Override
     protected @Nullable WebApplicationContext createRootApplicationContext() {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.register(SecurityConfig.class,AppConfig.class);
+        context.register(SecurityConfig.class, AppConfig.class);
         return context;
     }
 
@@ -32,5 +33,10 @@ public class DispatcherServletInitializer extends AbstractDispatcherServletIniti
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
         MultipartConfigElement multipartConfigElement = new MultipartConfigElement("");
         registration.setMultipartConfig(multipartConfigElement);
+    }
+
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[]{new SecurityFilter()};
     }
 }
