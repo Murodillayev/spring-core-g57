@@ -30,7 +30,7 @@
             <tr th:each="r : ${rentals}">
                 <td th:text="${r.book.title}">Kitob nomi</td>
                 <td th:text="${r.borrowerName}">Ijarachi</td>
-                <td th:text="${r.rentDate}">Sana</td>
+                <td th:text="${r.createdAt}">Sana</td>
                 <td>
                     <a th:href="@{/rentals/return/{id}(id=${r.id})}"
                        class="btn btn-sm btn-warning"

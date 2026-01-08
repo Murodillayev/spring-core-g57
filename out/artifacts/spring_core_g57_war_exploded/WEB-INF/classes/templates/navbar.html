@@ -17,6 +17,8 @@
                 <li class="nav-item"><a class="nav-link" href="/" th:classappend="${activeMenu == 'home'?'active':''}">Bosh sahifa</a></li>
                 <li class="nav-item"><a class="nav-link" href="/books" th:classappend="${activeMenu == 'book'?'active':''}">Kitoblar</a></li>
                 <li class="nav-item"><a class="nav-link" href="/rentals" th:classappend="${activeMenu == 'rental'?'active':''}">Ijaralar</a></li>
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item"><a class="nav-link" href="/roles" th:classappend="${activeMenu == 'role'?'active':''}">Rollar</a></li>
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item"><a class="nav-link" href="/permissions" th:classappend="${activeMenu == 'permission'?'active':''}">Ruxsatlar</a></li>
                 <li sec:authorize="hasRole('ADMIN')" class="nav-item"><a class="nav-link" href="/users" th:classappend="${activeMenu == 'users'?'active':''}">Foydalanuvchilar</a></li>
 
                 <li class="nav-item dropdown ms-lg-3" sec:authorize="isAuthenticated()">

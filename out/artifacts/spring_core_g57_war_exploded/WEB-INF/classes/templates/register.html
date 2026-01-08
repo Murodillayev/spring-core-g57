@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -96,12 +96,9 @@
                         <input type="file" name="img" multiple="multiple" class="form-control shadow-sm" id="img">
                     </div>
 
-                    <div class="mb-3">
-                        <label for="imgs" class="form-label">Rasm</label>
-                        <input type="file" name="imgs" multiple="multiple" class="form-control shadow-sm" id="imgs">
-                    </div>
 
-                    <div class="mb-3">
+
+                    <div class="mb-3" sec:authorize="isAuthenticated() && (hasAuthority('user:crud') || hasRole('ADMIN'))">
                         <label for="role" class="form-label">Foydalanuvchi roli</label>
                         <select name="roleId" class="form-select shadow-sm" id="role" required>
                             <option value="" disabled selected>Rolni tanlang...</option>

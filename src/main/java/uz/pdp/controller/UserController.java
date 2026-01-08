@@ -1,12 +1,10 @@
 package uz.pdp.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import uz.pdp.dto.AuthUserDto;
-import uz.pdp.model.AuthUser;
+import uz.pdp.model.dto.AuthUserDto;
 import uz.pdp.service.AuthUserService;
 
 import java.util.List;

@@ -2,12 +2,13 @@ package uz.pdp.mapper;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import uz.pdp.dto.AuthUserCreateDto;
-import uz.pdp.dto.AuthUserDto;
+import uz.pdp.model.dto.AuthUserCreateDto;
+import uz.pdp.model.dto.AuthUserDto;
 import uz.pdp.model.AuthRole;
 import uz.pdp.model.AuthUser;
 import uz.pdp.repository.RoleRepository;
 
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 @Component

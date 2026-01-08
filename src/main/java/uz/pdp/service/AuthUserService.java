@@ -2,9 +2,8 @@ package uz.pdp.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import uz.pdp.dto.AuthUserCreateDto;
-import uz.pdp.dto.AuthUserDto;
+import uz.pdp.model.dto.AuthUserCreateDto;
+import uz.pdp.model.dto.AuthUserDto;
 import uz.pdp.mapper.AuthUserMapper;
 import uz.pdp.model.AuthUser;
 import uz.pdp.repository.AuthUserRepository;
@@ -22,9 +21,6 @@ public class AuthUserService {
         AuthUser authUser = mapper.fromDto(dto);
         authUser.setImgUrl(fileService.uploadUserImg(dto.getImg()));
 
-//        for (MultipartFile img : dto.getImgs()) {
-//            fileService.uploadUserImg(img);
-//        }
         repository.save(authUser);
     }
 

@@ -11,19 +11,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/rentals")
 public class RentalController {
 
-    private final BookService bookService;
-    private final RentalService rentalService;
+    private final RentalService service;
 
-    public RentalController(BookService bookService, RentalService rentalService) {
-        this.bookService = bookService;
-        this.rentalService = rentalService;
+    public RentalController(RentalService service) {
+        this.service = service;
     }
 
     // Kitobni ijaraga berish
     @PostMapping("/rent")
     public String rent(@RequestParam("bookId") String bookId,
                        @RequestParam("borrower") String borrower) {
-        rentalService.rent(bookService.getById(bookId), borrower);
+        service.rent(bookId, borrower);
         return "redirect:/books";  // yoki "redirect:/" — o‘zingiz xohlagancha
     }
 
@@ -31,14 +29,14 @@ public class RentalController {
     @GetMapping
     public String rentals(Model model) {
 
-        model.addAttribute("rentals", rentalService.activeRentals());
+        model.addAttribute("rentals", service.activeRentals());
         return "rentals";
     }
 
     // Kitobni qaytarish
     @GetMapping("/return/{id}")
     public String returnBook(@PathVariable("id") String id) {
-        rentalService.returnBook(id);
+        service.returnBook(id);
         return "redirect:/rentals";
     }
 }

@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import uz.pdp.dto.AuthUserCreateDto;
-import uz.pdp.dto.IdNameDto;
+import uz.pdp.model.dto.AuthUserCreateDto;
+import uz.pdp.model.dto.IdNameDto;
 import uz.pdp.service.AuthRoleService;
 import uz.pdp.service.AuthUserService;
 
@@ -31,12 +31,6 @@ public class AuthController {
 
     @GetMapping("/register")
     public String registerPage(Model model) {
-
-//        SecurityContext context = SecurityContextHolder.getContext();
-//        Authentication authentication = context.getAuthentication();
-//        CustomUserDetails sessionUser =(CustomUserDetails) authentication.getPrincipal();
-
-
         List<IdNameDto> roles = roleService.roles();
 
         model.addAttribute("roles", roles);

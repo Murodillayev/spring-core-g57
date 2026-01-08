@@ -1,4 +1,4 @@
-package uz.pdp.dto;
+package uz.pdp.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +11,6 @@ public class AuthUserCreateDto {
     private String username;
     private String roleId;
     private String password;
-    private MultipartFile[] imgs;
     private MultipartFile img;
 }
 

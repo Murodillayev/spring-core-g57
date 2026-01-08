@@ -3,9 +3,6 @@ package uz.pdp.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
-import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -27,9 +24,7 @@ public class SecurityConfig {
 
     private String[] WHITE_LIST = {
             "/login",
-            "/register",
-            "/test/**",
-            "/**"
+            "/register"
     };
     private final AuthUserRepository authUserRepository;
     private final PermissionRepository permissionRepository;
@@ -41,20 +36,15 @@ public class SecurityConfig {
         this.roleRepository = roleRepository;
     }
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity security) throws Exception {
 
-//        security.csrf(AbstractHttpConfigurer::disable);
+        security.csrf(AbstractHttpConfigurer::disable);
         security.cors(AbstractHttpConfigurer::disable);
         security.authorizeHttpRequests(
                 auth ->
                         auth.requestMatchers(WHITE_LIST)
                                 .permitAll()
-                                .requestMatchers("/books/admin")
-                                .hasAnyAuthority("create:book", "create:rental")
-                                .requestMatchers("/books/user")
-                                .hasAnyRole("USER", "ADMIN")
                                 .anyRequest()
                                 .authenticated()
         );
@@ -64,8 +54,8 @@ public class SecurityConfig {
         security.formLogin(
                 loginForm ->
                         loginForm.loginPage("/login")
-                                .usernameParameter("usrn")
-                                .passwordParameter("pass")
+                                .usernameParameter("username")
+                                .passwordParameter("password")
                                 .defaultSuccessUrl("/", true)
         );
 

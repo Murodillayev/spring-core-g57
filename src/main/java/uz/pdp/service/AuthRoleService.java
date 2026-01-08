@@ -1,11 +1,9 @@
 package uz.pdp.service;
 
 import org.springframework.stereotype.Service;
-import uz.pdp.dto.IdNameDto;
+import uz.pdp.model.dto.IdNameDto;
 import uz.pdp.model.AuthRole;
-import uz.pdp.model.AuthUser;
 import uz.pdp.repository.AuthRoleRepository;
-import uz.pdp.repository.AuthUserRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;

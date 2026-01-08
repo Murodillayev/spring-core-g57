@@ -31,7 +31,7 @@
                 </div>
                 <div class="card-body">
                     <form method="post" action="/books/add" th:object="${book}">
-                        <input type="text" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+<!--                        <input type="text" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
                         <div class="mb-3">
                             <label class="form-label">Kitob nomi</label>
                             <input type="text" th:field="*{title}" class="form-control">

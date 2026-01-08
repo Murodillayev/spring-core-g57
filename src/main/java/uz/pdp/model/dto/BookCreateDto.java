@@ -16,7 +16,8 @@ public class BookCreateDto {
 
     @NotBlank
     @NotNull
-    @Pattern(regexp = "[A-Za-z]{2,}")
+    @Size(min = 2, max = 30)
+//    @Pattern(regexp = "[A-Za-z]{2,}")
     private String author;
 
 
@@ -27,3 +28,7 @@ public class BookCreateDto {
 
     private Integer totalCopies;
 }
+
+// authuser(seller,consumner)(shop_id), Shop, product, cart, order, comment
+
+//

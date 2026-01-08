@@ -3,6 +3,7 @@ package uz.pdp.repository;
 import uz.pdp.model.Rental;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RentalRepository {
 
@@ -10,5 +11,5 @@ public interface RentalRepository {
 
     List<Rental> findActive();
 
-    Rental findById(String id);
+    Optional<Rental> findById(String id);
 }

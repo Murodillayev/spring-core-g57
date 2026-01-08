@@ -1,4 +1,4 @@
-package uz.pdp.dto;
+package uz.pdp.model.dto;
 
 import lombok.Builder;
 import lombok.Getter;
